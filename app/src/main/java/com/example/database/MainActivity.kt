@@ -40,11 +40,11 @@ class MainActivity : ComponentActivity() {
                         NoteListScreen(navController, noteViewModel)
                     }
                     composable("NoteInputScreen/{noteId}") { backStackEntry: NavBackStackEntry ->
-                        val noteId = backStackEntry.arguments?.getString("noteId")?.toLongOrNull()
-                        NoteInputScreen(navController, noteViewModel, noteId)
+                        val noteId = backStackEntry.arguments?.getString("noteId")?.toLongOrNull() //to access the noteId argument, and edit a specific note.
+                        NoteInputScreen(navController, noteViewModel, noteId) // Opens NoteInputScreen with a specific note ID
                     }
-                    composable("NoteInputScreen") { // For creating a new note
-                        NoteInputScreen(navController, noteViewModel, null)
+                    composable("NoteInputScreen") {
+                        NoteInputScreen(navController, noteViewModel, null)//Opens NoteInputScreen without an ID (for creating a new note).
                     }
                 }
             }

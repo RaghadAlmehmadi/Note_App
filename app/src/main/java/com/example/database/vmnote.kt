@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private val noteDao = NoteDatabase.getDatabase(application).noteDao()
-    val allNotes: Flow<List<Note>> = noteDao.getAllNotes()
+    val allNotes: Flow<List<Note>> = noteDao.getAllNotes() //Fetches all notes
 
     fun saveNote(note: Note) {
         viewModelScope.launch {
@@ -24,7 +24,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getNoteById(id: Long?): Flow<Note?> {
-        return if (id == null) flowOf(null) else noteDao.getNoteById(id)
+        return if (id == null) flowOf(null) else noteDao.getNoteById(id) //Retrieves a specific note using its ID
     }
 
     fun deleteNote(note: Note) {

@@ -18,7 +18,8 @@ fun NoteInputScreen(
     var title by remember { mutableStateOf("") }
     var content by remember { mutableStateOf("") }
     val note by noteViewModel.getNoteById(noteId)
-        .collectAsState(initial = null)// UI will automatically update when the note is fetched
+        .collectAsState(initial = null)// // Fetch and observe the note by ID
+
 
 
     // re-fill title and content if editing an existing note
@@ -35,7 +36,7 @@ fun NoteInputScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Creation/Editing",
+            text = if (noteId == null) "Create Note" else "Edit Note",
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
@@ -82,12 +83,13 @@ fun NoteInputScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Column {
+            //Display query individual notes by ID
             Text(
                 text = "Query for individual notes with specific ID $noteId",
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold,
             )
-            Text(text = "Loaded Note: ${note?.title ?: "New Note"}") //show the specific note by ID
+            Text(text = "Note: ${note?.title ?: "New Note"}") //show the specific note by ID
         }
     }
 }

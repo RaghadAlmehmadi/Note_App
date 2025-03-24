@@ -1,6 +1,5 @@
 package com.example.database
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -48,8 +47,6 @@ fun NoteListScreen(navController: NavController, noteViewModel: NoteViewModel) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(8.dp)
-                            .clickable { navController.navigate("NoteScreen/${note.id}") }, // Navigate to edit
-
                     ) {
                         Row(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
                                 Column {
@@ -70,11 +67,11 @@ fun NoteListScreen(navController: NavController, noteViewModel: NoteViewModel) {
                                         navController.navigate("NoteInputScreen/${note.id}")
                                     }
                                 }) {
-                                    Icon(Icons.Default.Edit, contentDescription = "Edit Note")
+                                    Icon(Icons.Default.Edit, contentDescription = "Edit Note")//Edit Note
                                 }
 
-                                IconButton(onClick = { noteViewModel.deleteNote(note) }) { // Delete Note
-                                    Icon(Icons.Default.Delete, contentDescription = "Delete Note")
+                                IconButton(onClick = { noteViewModel.deleteNote(note) }) {
+                                    Icon(Icons.Default.Delete, contentDescription = "Delete Note")// Delete Note
                                 }
 
                             }
@@ -85,15 +82,16 @@ fun NoteListScreen(navController: NavController, noteViewModel: NoteViewModel) {
 
         }
 
-        //button to create a new note
         Spacer(modifier = Modifier.height(16.dp))
+        //button to create a new note
         Button(
             onClick = { navController.navigate("NoteInputScreen") },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Create New Note")
         }
-        //Query all notes
+
+        //Display Query all notes in database
         Text(text = "Query for all notes",
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold,

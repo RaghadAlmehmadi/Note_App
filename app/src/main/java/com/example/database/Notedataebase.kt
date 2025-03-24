@@ -54,10 +54,6 @@ interface NoteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(note: Note)
 
-    // **Read**: Get all notes (Live updates using Flow)
-    @Query("SELECT * FROM notes ORDER BY id DESC")
-    fun getAllNotes(): Flow<List<Note>>
-
     // **Update**: Update an existing note
     @Update
     suspend fun update(note: Note)
@@ -66,6 +62,9 @@ interface NoteDao {
     @Delete
     suspend fun delete(note: Note)
 
+    // **Read**: Get all notes
+    @Query("SELECT * FROM notes ORDER BY id DESC")
+    fun getAllNotes(): Flow<List<Note>>
 
     //Retrieves a single note by ID.
     @Query("SELECT * FROM notes WHERE id = :id")
